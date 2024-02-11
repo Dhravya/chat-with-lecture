@@ -9,14 +9,14 @@ const nextConfig = {};
 if (process.env.NODE_ENV === 'development') {
   await setupDevBindings({
     bindings: {
-        // Add here the Cloudflare Bindings you want to have available during local development,
-        // for more details on Bindings see: https://developers.cloudflare.com/pages/functions/bindings/)
-        //
-        // KV Example:
-        // MY_KV: {
-        //   type: 'kv',
-        //   id: 'xxx',
-        // }
+      // Add here the Cloudflare Bindings you want to have available during local development,
+      // for more details on Bindings see: https://developers.cloudflare.com/pages/functions/bindings/)
+      //
+      // KV Example:
+      // MY_KV: {
+      //   type: 'kv',
+      //   id: 'xxx',
+      // }
     }
   });
 }
