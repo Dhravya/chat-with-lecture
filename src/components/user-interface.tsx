@@ -50,7 +50,7 @@ export function UserInterface() {
       // Stop recording after 1 minute (60000ms)
       setTimeout(() => {
         recorder.stop();
-      }, 30000);
+      }, 60000);
 
       // Once the recorder stops, process and send the audio file
       recorder.onstop = async () => {
@@ -79,10 +79,10 @@ export function UserInterface() {
   }
 
   const handleButtonClick = () => {
-    // run recordForOneMinute in loop 
     if (buttonText === 'Start') {
       setButtonText('Stop');
-      const id = setInterval(recordForOneMinute, 30000);
+      recordForOneMinute(); // Call recordForOneMinute immediately
+      const id = setInterval(recordForOneMinute, 60000);
       setIntervalId(id);
     } else {
       setButtonText('Start');

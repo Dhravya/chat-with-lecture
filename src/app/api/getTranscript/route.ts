@@ -48,9 +48,7 @@ export async function POST(req: Request): Promise<Response> {
 
     const audioBytes = await audio.arrayBuffer();
 
-    const { result, error } = await deepgram.listen.prerecorded.transcribeFile(audioBytes as FileSource, {
-        punctuate: true,
-    })
+    const { result, error } = await deepgram.listen.prerecorded.transcribeFile(audioBytes as FileSource)
 
     if (error) {
         console.log(error)
