@@ -1,57 +1,54 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`c3`](https://developers.cloudflare.com/pages/get-started/c3).
+<div align="center">
+<h1 align="center">Chat with your Lecture</h1>
+<br />
+<img alt="License: MIT" src="https://img.shields.io/badge/License-MIT-blue.svg" /><br>
+<br>
+Ask questions about your lecture in real time, chat with your lecture! Made with <a href='https://embedchain.ai'>Embedchain</a>
+</div>
 
-## Getting Started
+***
+![Chat with your Lecture](https://i.dhr.wtf/r/Image_from_Slack.png)
 
-First, run the development server:
+## Why?
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+As a university student it's very annoying to interrupt the lecture to ask a question. And if the question is not good, it ends up disturbing the whole class and embarrassing for the student. This is why I made this project. It allows students to ask questions in real time without interrupting the lecture. Also provides a live transcript of the lecture so that nothing is missed. This tool can later be used to generate notes and study material.
+
+### Features
+
+- Ask questions about your lecture in real time
+- Get your doubts solved without interrupting your lecture
+- Get a live transcript of your lecture
+
+### Installation
+
+First, get the environment variables from the `.env.example` file and create a `.env` file with the same variables. Then, run the following commands:
+
+```
+git clone https://github.com/dhravya/chat-with-lecture.git
+bun install
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
-
-## Cloudflare integration
-
-Besides the `dev` script mentioned above `c3` has added a few extra scripts that allow you to integrate the application with the [Cloudflare Pages](https://pages.cloudflare.com/) environment, these are:
-  - `pages:build` to build the application for Pages using the [`@cloudflare/next-on-pages`](https://github.com/cloudflare/next-on-pages) CLI
-  - `pages:preview` to locally preview your Pages application using the [Wrangler](https://developers.cloudflare.com/workers/wrangler/) CLI
-  - `pages:deploy` to deploy your Pages application using the [Wrangler](https://developers.cloudflare.com/workers/wrangler/) CLI
-
-> __Note:__ while the `dev` script is optimal for local development you should preview your Pages application as well (periodically or before deployments) in order to make sure that it can properly work in the Pages environment (for more details see the [`@cloudflare/next-on-pages` recommended workflow](https://github.com/cloudflare/next-on-pages/blob/05b6256/internal-packages/next-dev/README.md#recommended-workflow))
-
-### Bindings
-
-Cloudflare [Bindings](https://developers.cloudflare.com/pages/functions/bindings/) are what allows you to interact with resources available in the Cloudflare Platform.
-
-You can use bindings during development, when previewing locally your application and of course in the deployed application:
-
-- To use bindings in dev mode you need to define them in the `next.config.js` file under `setupDevBindings`, this mode uses the `next-dev` `@cloudflare/next-on-pages` submodule. For more details see its [documentation](https://github.com/cloudflare/next-on-pages/blob/05b6256/internal-packages/next-dev/README.md).
-
-- To use bindings in the preview mode you need to add them to the `pages:preview` script accordingly to the `wrangler pages dev` command. For more details see its [documentation](https://developers.cloudflare.com/workers/wrangler/commands/#dev-1) or the [Pages Bindings documentation](https://developers.cloudflare.com/pages/functions/bindings/).
-
-- To use bindings in the deployed application you will need to configure them in the Cloudflare [dashboard](https://dash.cloudflare.com/). For more details see the  [Pages Bindings documentation](https://developers.cloudflare.com/pages/functions/bindings/).
-
-#### KV Example
-
-`c3` has added for you an example showing how you can use a KV binding, in order to enable the example, search for lines containing the following comment:
-```ts
-// KV Example:
+### Usage
+```
+bun run dev
 ```
 
-and uncomment the commented lines below it.
+### Contributing
 
-After doing this you can run the `dev` script and visit the `/api/hello` route to see the example in action.
+This is not a complete project, just a technical demonstration of what [Embedchain](https://embedchain.ai) can do, and how easily it can be integrated into your project.
 
-To then enable such example also in preview mode add a `kv` in the `pages:preview` script like so:
-```diff
--    "pages:preview": "npm run pages:build && wrangler pages dev .vercel/output/static --compatibility-date=2023-12-18 --compatibility-flag=nodejs_compat",
-+    "pages:preview": "npm run pages:build && wrangler pages dev .vercel/output/static --compatibility-date=2023-12-18 --compatibility-flag=nodejs_compat --kv MY_KV",
-```
+Contributions welcome.
 
-Finally, if you also want to see the example work in the deployed application make sure to add a `MY_KV` binding to your Pages application in its [dashboard kv bindings settings section](https://dash.cloudflare.com/?to=/:account/pages/view/:pages-project/settings/functions#kv_namespace_bindings_section). After having configured it make sure to re-deploy your application.
+**Planned features:**
+- [ ] "New lecture" button to start a new lecture
+- [ ] Store the chat and transcript in a database
+- [ ] Generate notes and study material from the transcript
+
+### License
+This project is licensed under the MIT license
+
+### Show your support
+Leave a ⭐ if you like this project
+
+***
+Readme made with 💖 using [README Generator by Dhravya Shah](https://github.com/Dhravya/readme-generator)
