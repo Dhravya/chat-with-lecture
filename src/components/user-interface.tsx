@@ -161,7 +161,13 @@ export function UserInterface() {
     >
       <div className="space-y-6">
         <div className="space-y-3">
-          <h1 className="text-3xl font-bold tracking-tight">
+          <h1 className="text-3xl font-bold tracking-tight flex gap-2">
+            <Image
+              src='/logo.png'
+              alt='Lecture Chat logo'
+              width={40}
+              height={40}
+            />
             Chat with your lecture
           </h1>
           {session ? (
