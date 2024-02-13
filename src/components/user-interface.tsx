@@ -278,7 +278,7 @@ export function UserInterface() {
             />
             <Button
               type='submit'
-              disabled={isAIResponseLoading !== false}
+              disabled={isAIResponseLoading !== false || !userInput || !session?.user?.email}
               onClick={async () => {
                 setUserInput('');
                 setAIResponseLoading(true);
