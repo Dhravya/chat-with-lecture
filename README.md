@@ -7,7 +7,7 @@ Ask questions about your lecture in real time, chat with your lecture! Made with
 </div>
 
 ***
-![Chat with your Lecture](https://i.dhr.wtf/r/Image_from_Slack.png)
+https://github.com/Dhravya/chat-with-lecture/assets/63950637/41207850-b136-4076-a518-2c1078cbfa22
 
 ## Why?
 
