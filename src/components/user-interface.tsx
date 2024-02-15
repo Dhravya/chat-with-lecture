@@ -42,6 +42,8 @@ export function UserInterface() {
   const [userInput, setUserInput] = useState<string>('');
   const [isAIResponseLoading, setAIResponseLoading] = useState<boolean | string>(false);
 
+  const [ytVidLink, setYtVidLink] = useState<string | undefined>();
+
   const toggleMicrophone = useCallback(async () => {
     if (microphone && userMedia) {
       setUserMedia(null);
@@ -185,6 +187,46 @@ export function UserInterface() {
                       ? 'Stop transcription'
                       : 'Click to start'}
               </Button>
+
+              OR
+
+              <form onSubmit={e => e.preventDefault()}>
+                <Input
+                  onChange={(e) => setYtVidLink(e.target.value)}
+                  placeholder="Enter YouTube video link"
+                />
+
+                <Button
+                  disabled={!ytVidLink || !apiKey}
+                  onClick={async () => {
+                    const videoId = ytVidLink?.split('v=')[1];
+
+                    if (!apiKey) {
+                      throw new Error('No api key found');
+                    }
+
+                    if (videoId) {
+                      setYtVidLink(`https://www.youtube.com/embed/${videoId}`);
+                    }
+                    else {
+                      throw new Error('Invalid YouTube video link');
+                    }
+
+                    const reque = await fetch('/api/getFullTranscript?url=' + ytVidLink);
+                    const data = await reque.json() as { transcript: string };
+                    setCaption(data.transcript)
+                    await fetch('/api/makeEmbedding', {
+                      method: 'POST',
+                      body: JSON.stringify({
+                        transcript: data.transcript,
+                      })
+                    }).then((res) => res.text()).then((text) => console.log(text))
+                      .catch((e) => console.error(e));
+                  }}
+                >
+                  Load video
+                </Button>
+              </form>
             </>
           ) : (
             <>
@@ -198,6 +240,17 @@ export function UserInterface() {
           )}
         </div>
         <div className="grid gap-1.5 overflow-auto h-[74vh]">
+          {ytVidLink && (
+            <iframe
+              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+              allowFullScreen
+              frameBorder="0"
+              height="100%"
+              src={ytVidLink}
+              title="YouTube video player"
+              width="100%"
+            />
+          )}
           <div className="flex flex-col gap-2">{caption}</div>
         </div>
       </div>
@@ -292,6 +345,7 @@ export function UserInterface() {
                 ]);
 
                 setAIResponseLoading('Reading the data...');
+                console.log(caption)
                 await fetch('/api/makeEmbedding', {
                   method: 'POST',
                   body: JSON.stringify({
