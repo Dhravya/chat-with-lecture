@@ -197,9 +197,10 @@ export function UserInterface() {
                 />
 
                 <Button
-                  disabled={!ytVidLink || !apiKey}
+                  disabled={!ytVidLink || !apiKey || isLoading}
                   onClick={async () => {
                     const videoId = ytVidLink?.split('v=')[1];
+                    setLoading(true);
 
                     if (!apiKey) {
                       throw new Error('No api key found');
@@ -213,8 +214,12 @@ export function UserInterface() {
                     }
 
                     const reque = await fetch('/api/getFullTranscript?url=' + ytVidLink);
+                    if (reque.status !== 200) {
+                      console.log(reque);
+                    } 
                     const data = await reque.json() as { transcript: string };
                     setCaption(data.transcript)
+                    setLoading(false);
                     await fetch('/api/makeEmbedding', {
                       method: 'POST',
                       body: JSON.stringify({
@@ -224,7 +229,7 @@ export function UserInterface() {
                       .catch((e) => console.error(e));
                   }}
                 >
-                  Load video
+                  {isLoading? 'Loading...' : 'Load video'}
                 </Button>
               </form>
             </>
